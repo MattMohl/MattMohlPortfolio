@@ -23,24 +23,8 @@ portfolio.config(function ($routeProvider) {
         controller: 'admin',
         templateUrl: 'views/login.html'
     })
-    .otherwise({ redirectTo: '/home' });
+    .otherwise({ redirectTo: '/' });
 
-}).filter('toArray', function () {
-    'use strict';
-    return function (obj) {
-        if (!(obj instanceof Object)) {
-            return obj;
-        }
-
-        return Object.keys(obj).filter(function (key) { if (key.charAt(0) !== "$") { return key; } }).map(function (key) {
-            return Object.defineProperty(obj[key], '$key', { __proto__: null, value: key });
-        });
-    };
-}).filter('reverse', function () {
-    console.log('shit');
-    return function (items) {
-        return items.slice().reverse();
-    };
 });
 
 portfolio.run(['$route', '$rootScope', '$firebase', '$location', function ($route, $rootScope, $firebase, $location) {
