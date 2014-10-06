@@ -1,4 +1,4 @@
-﻿portfolio.controller('admin', ['$route', '$scope', '$rootScope', '$firebase', '$firebaseSimpleLogin', function ($route, $scope, $rootScope, $firebase, $firebaseSimpleLogin) {
+﻿portfolio.controller('admin', function ($route, $scope, $rootScope, $firebase, $firebaseSimpleLogin) {
     console.log('ADMIN');
 
     $scope.admin = {
@@ -6,8 +6,17 @@
         pass: ''
     };
 
-    $scope.login = function () {
-        console.log('attempt', $scope.admin.email, $scope.admin.pass);
+    $rootScope.authRef = new FirebaseSimpleLogin($rootScope.firebase,
+        function (error, user) {
+            console.log(error);
+            console.log(user);
+        });
+
+    //$rootScope.authRef.login('password', $scope.admin);
+
+    $scope.log = function () {
+        console.log($scope.admin);
+        $rootScope.authRef.login('password', $scope.admin);
     }
 
-}]);
+});

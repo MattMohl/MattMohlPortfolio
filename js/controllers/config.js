@@ -32,4 +32,6 @@ portfolio.run(['$route', '$rootScope', '$firebase', '$location', function ($rout
 
     // Every Time Browser is Refreshed . . .
 
+    $rootScope.firebase = new Firebase("https://mattmohl.firebaseio.com/");
+
 }]);
