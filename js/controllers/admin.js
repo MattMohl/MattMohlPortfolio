@@ -1,22 +1,21 @@
-﻿portfolio.controller('admin', function ($route, $scope, $rootScope, $firebase, $firebaseSimpleLogin) {
+﻿portfolio.controller('admin', function ($route, $scope, $rootScope, $firebase, $location, $firebaseSimpleLogin) {
     console.log('ADMIN');
 
-    $scope.admin = {
-        email: '',
-        pass: ''
-    };
+    $scope.admin = { email: 'mattmohldev@gmail.com', pass: '' };
 
-    $rootScope.authRef = new FirebaseSimpleLogin($rootScope.firebase,
-        function (error, user) {
-            console.log(error);
-            console.log(user);
+    $scope.login = function () {
+        console.log('bullshit');
+        $rootScope.authRef.login('password', {
+            email: $scope.admin.email,
+            password: $scope.admin.pass
         });
+    }
 
-    //$rootScope.authRef.login('password', $scope.admin);
-
-    $scope.log = function () {
-        console.log($scope.admin);
-        $rootScope.authRef.login('password', $scope.admin);
+    $scope.logout = function () {
+        console.log('logout');
+        $rootScope.authRef.logout();
+        delete $rootScope.currentUser;
+        $location.path('/');
     }
 
 });

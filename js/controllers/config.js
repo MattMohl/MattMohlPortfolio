@@ -22,6 +22,9 @@ portfolio.config(function ($routeProvider) {
     }).when('/admin', {
         controller: 'admin',
         templateUrl: 'views/login.html'
+    }).when('/dash', {
+        controller: 'admin',
+        templateUrl: 'views/dash.html'
     })
     .otherwise({ redirectTo: '/' });
 
@@ -32,6 +35,18 @@ portfolio.run(['$route', '$rootScope', '$firebase', '$location', function ($rout
 
     // Every Time Browser is Refreshed . . .
 
-    $rootScope.firebase = new Firebase("https://mattmohl.firebaseio.com/");
+    $rootScope.firebase = new Firebase("https://mattmohl.firebaseio.com");
+    $rootScope.infoRef = new Firebase("https://mattmohl.firebaseio.com/.info/authenticated");
+
+    $rootScope.authRef = new FirebaseSimpleLogin($rootScope.firebase,
+        function (error, user) {
+            // If right
+            if (user) {
+                console.log('GOOD', user);
+                $rootScope.currentUser = user;
+            } else {
+                console.log('NOPE');
+            }
+        });
 
 }]);

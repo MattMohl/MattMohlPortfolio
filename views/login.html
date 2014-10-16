@@ -1,7 +1,10 @@
-﻿<h1>Admin</h1>
+﻿
+<h1>Login</h1>
 
-<input ng-model="admin.email" type="email" placeholder="Email"/>
+<input ng-model="admin.email" type="email"/>
 
 <input ng-model="admin.pass" type="password" placeholder="Password"/>
 
-<input type="submit" value="Login" ng-click="$scope.log()" />
+<input type="submit" value="Login" ng-click="login()" />
+
+<input type="submit" value="Logout" ng-click="logout()" />
